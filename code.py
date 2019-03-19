@@ -7,67 +7,56 @@ nmork=input("sláðu inn y fyrir neðri mörk: ")
 efrisumma = 0
 nedrisumma = 0
 for z in range(len(fall)):
-    curr = 0
+    currefra = 0
+    currnedra = 0
+    margfeldi = 1
     if fall[z] == "x":
-        curr += int(emork)
+        currefra += int(emork)
+        currnedra += int(nmork)
         if z != 0:
             if fall[z-1] == "-":
-                curr *= -1
+                currefra *= -1
+                currnedra *= -1
             elif fall[z-1].isnumeric():
-                curr *= int(fall[z-1])
-            if z >= 3:
-                if fall[z-2] == "-":
-                    curr *= -1
-        print("extra curr:",curr)
+                margfeldi *= int(fall[z-1])
+                if z >= 2:
+                    if fall[z-2] == "-":
+                        currefra *= -1
+                        currnedra *= -1
         if z != len(fall)-1:
             if fall[z+1].isnumeric():
-                curr = curr**(int(fall[z+1])+1)
-                curr = (1/(int(fall[z+1])+1))*curr
-            else:
-                curr = curr**2
-                curr = (1/2)*curr
+                currefra = currefra**(int(fall[z+1])+1)
+                currefra *= margfeldi
+                currefra = (1/(int(fall[z+1])+1))*currefra
+                #neðra
+                currnedra = currnedra**(int(fall[z+1])+1)
+                currnedra *= margfeldi
+                currnedra = (1/(int(fall[z+1])+1))*currnedra
+        else:
+            currefra = currefra**2
+            currefra = (1/2)*margfeldi*currefra
+            #nedra
+            currnedra = currnedra**2
+            currnedra = (1/2)*margfeldi*currnedra
     elif fall[z].isnumeric():
-        curr = int(emork)*int(fall[z])
+        currefra = int(emork)*int(fall[z])
+        currnedra = int(nmork)*int(fall[z])
         if z != 0:
             if fall[z-1] == "x":
-                curr = 0
+                currefra = 0
+                currnedra = 0
             elif fall[z-1] == "-":
-                curr *= -1
+                currefra *= -1
+                currnedra *= -1
         if z != len(fall)-1:
             if fall[z+1] == "x":
-                curr = 0
+                currefra = 0
+                currnedra = 0
     print("z:",z)
-    print("curr:",curr)
-    efrisumma += curr
-print(efrisumma)
-'''
-for z in range(len(fall)):
-    curr = 0
-    if fall[z] == "x":
-        curr += int(nmork)
-        if z != 0:
-            if fall[z-1] == "-":
-                curr *= -1
-            elif fall[z-1].isnumeric():
-                curr *= fall[z-1]
-            if z >= 3:
-                if fall[z-2] == "-":
-                    curr *= -1
-        if z != len(fall)-1:
-            if fall[z+1].isnumeric():
-                curr = (1/int(fall[z+1])+1)*curr**int(fall[z+1])+1
-    if fall[z].isnumeric():
-        curr = int(nmork)*int(fall[z])
-        if z != 0:
-            if fall[z-1] == "x":
-                curr = 0
-            elif fall[z-1] == "-":
-                curr *= -1
-        if z != len(fall)-1:
-            if fall[z+1] == "x":
-                curr = 0
-    nedrisumma +=curr
-
-totalsumma = efrisumma-(nedrisumma)
-print(totalsumma)
-'''
+    print("curre:",currefra)
+    print("currn:",currnedra)
+    efrisumma += currefra
+    nedrisumma += currnedra
+print(efrisumma," + ",nedrisumma)
+totalsumma = abs(efrisumma-(nedrisumma))
+print("=",totalsumma)
