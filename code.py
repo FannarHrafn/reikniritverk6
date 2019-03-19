@@ -73,18 +73,20 @@ for x in range(len(innihald)):
     innihald[x] = list(map(int,innihald[x]))
 print(innihald)
 print(innihald[67][3]+1)
-print(type(innihald[0][0]))
 def maxsum(listi,lina,index,summa):
     trihyrn = listi
     lina = lina
     index = index
     summa = summa
-    print(type(summa))
     if lina != len(trihyrn)-1:
-        if trihyrn[lina+1][index]>trihyrn[lina+1][index+1]:
+        if trihyrn[lina+1][index] > trihyrn[lina+1][index+1]:
+            print(trihyrn[lina+1][index],'vs',trihyrn[lina+1][index+1])
+            print('winner:',trihyrn[lina+1][index])
             summa = summa+trihyrn[lina+1][index]
             return maxsum(trihyrn,lina+1,index,summa)
         else:
+            print(trihyrn[lina+1][index+1],'vs',trihyrn[lina+1][index])
+            print('winner:',trihyrn[lina+1][index+1])
             summa = summa+trihyrn[lina+1][index+1]
             return maxsum(trihyrn,lina+1,index+1,summa)
     return summa
