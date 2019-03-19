@@ -1,5 +1,8 @@
 #Fannar Hrafn Haraldsson
-#heildun
+
+'''
+#heildun og flatarmál
+#fattaði seinna að ég gæti hafa stytt þennan kóðan mikið með að hafa bara eina summu frá byrjun
 import math
 fall=input("sláðu inn fall f(x): ")
 emork=input("sláðu inn x fyrir efri mörk: ")
@@ -60,3 +63,52 @@ for z in range(len(fall)):
 print(efrisumma," + ",nedrisumma)
 totalsumma = abs(efrisumma-(nedrisumma))
 print("=",totalsumma)
+'''
+with open('triangle.txt','r') as file:
+    innihald = file.read().split('\n')
+    del innihald[-1]
+
+for x in range(len(innihald)):
+    innihald[x] = innihald[x].split(" ")
+    innihald[x] = list(map(int,innihald[x]))
+print(innihald)
+print(innihald[67][3]+1)
+print(type(innihald[0][0]))
+def maxsum(listi,lina,index,summa):
+    trihyrn = listi
+    lina = lina
+    index = index
+    summa = summa
+    print(type(summa))
+    if lina != len(trihyrn)-1:
+        if trihyrn[lina+1][index]>trihyrn[lina+1][index+1]:
+            summa = summa+trihyrn[lina+1][index]
+            return maxsum(trihyrn,lina+1,index,summa)
+        else:
+            summa = summa+trihyrn[lina+1][index+1]
+            return maxsum(trihyrn,lina+1,index+1,summa)
+    return summa
+print(maxsum(innihald,0,0,0))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
