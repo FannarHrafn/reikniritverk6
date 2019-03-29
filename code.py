@@ -1,8 +1,10 @@
 #Fannar Hrafn Haraldsson
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 
 '''
 #heildun og flatarmál
-#fattaði seinna að ég gæti hafa stytt þennan kóðan mikið með að hafa bara eina summu frá byrjun
 import math
 fall=input("sláðu inn fall f(x): ")
 emork=input("sláðu inn x fyrir efri mörk: ")
@@ -71,46 +73,36 @@ with open('triangle.txt','r') as file:
 for x in range(len(innihald)):
     innihald[x] = innihald[x].split(" ")
     innihald[x] = list(map(int,innihald[x]))
-print(innihald)
-print(innihald[67][3]+1)
+#print(innihald)
+#print(innihald[67][3]+1)
 def maxsum(listi,lina,index,summa):
     trihyrn = listi
     lina = lina
     index = index
     summa = summa
-    if lina != len(trihyrn)-1:
+    if lina == 0 and summa == 0:
+        summa += trihyrn[0][0]
+        print("default winner: ",trihyrn[0][0])
+        print(summa)
+        return maxsum(trihyrn,lina,index,summa)
+    elif lina == 99:
+        return summa
+    else:
         if trihyrn[lina+1][index] > trihyrn[lina+1][index+1]:
             print(trihyrn[lina+1][index],'vs',trihyrn[lina+1][index+1])
             print('winner:',trihyrn[lina+1][index])
+            print("lina:",lina+1)
             summa = summa+trihyrn[lina+1][index]
+            print("summa:",summa)
             return maxsum(trihyrn,lina+1,index,summa)
+        elif trihyrn[lina+1][index] == trihyrn[lina+1][index+1]:
+            print("eins tölur í línu",lina,trihyrn[lina+1][index],"vs",trihyrn[lina+1][index+1])
         else:
             print(trihyrn[lina+1][index+1],'vs',trihyrn[lina+1][index])
             print('winner:',trihyrn[lina+1][index+1])
+            print("lina:",lina)
             summa = summa+trihyrn[lina+1][index+1]
+            print("summa:",summa)
             return maxsum(trihyrn,lina+1,index+1,summa)
-    return summa
 print(maxsum(innihald,0,0,0))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
